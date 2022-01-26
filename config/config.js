@@ -11,6 +11,14 @@ export default {
   },
   routes: [
     {
+      path: '/signup',
+      routes: [{ path: '/signup', component: '../pages/signup/signup', exact: true }],
+    },
+    {
+      path: '/login',
+      routes: [{ path: '/login', component: '../pages/login/login', exact: true }],
+    },
+    {
       path: '/',
       component: '../layouts/GlobalLayout',
       routes: [{ path: '/', component: '../pages/index/Index', exact: true }],

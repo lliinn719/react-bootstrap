@@ -45,7 +45,7 @@ export default withRouter(
                       <NavDropdown.Item href="#action/3.2">地圖</NavDropdown.Item>
                       <NavDropdown.Item href="#action/3.3">訂購</NavDropdown.Item>
                     </NavDropdown>
-                    <Nav.Link href="#login">登入/註冊</Nav.Link>
+                    <Nav.Link href="/login">登入/註冊</Nav.Link>
                   </Nav>
                 </Navbar.Collapse>
               </Container>

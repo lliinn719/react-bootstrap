@@ -207,7 +207,7 @@ export default connect(
                     <Form.Check type="radio" inline label="是" name="group1" id="one" />
                     <Form.Check type="radio" inline label="否" name="group1" id="two" />
                   </Form.Group>
-                  <Button variant="primary" className="submitButton" onClick={this.onShow}>
+                  <Button variant="primary" onClick={this.onShow}>
                     送出
                   </Button>
                   <Modal
