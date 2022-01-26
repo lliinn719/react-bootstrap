@@ -3,7 +3,18 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import './Index.less';
 import CommonButton from '../../components/Button/commonButton';
-import { Container, Alert, Row, Col, Figure, Image, Form, Button } from 'react-bootstrap';
+import {
+  Container,
+  Alert,
+  Row,
+  Col,
+  Figure,
+  Image,
+  Form,
+  Button,
+  Modal,
+  Toast,
+} from 'react-bootstrap';
 
 const mapStateToProps = state => {
   return {};
@@ -18,7 +29,35 @@ export default connect(
   mapDispatchToProps,
 )(
   class Index extends Component {
+    state = {
+      show: false,
+      toastShow: false,
+    };
+    onShow = () => {
+      this.setState({
+        show: true,
+      });
+    };
+    onClose = () => {
+      this.setState({
+        show: false,
+      });
+    };
+
+    showToast = () => {
+      this.setState({
+        show: false,
+        toastShow: true,
+      });
+    };
+    closeToast = () => {
+      this.setState({
+        toastShow: false,
+      });
+    };
+
     render() {
+      const { show, toastShow } = this.state;
       return (
         <div>
           <Container fluid className="indexPage p-5">
@@ -169,9 +208,44 @@ export default connect(
                     <Form.Check type="radio" inline label="是" name="group1" id="one" />
                     <Form.Check type="radio" inline label="否" name="group1" id="two" />
                   </Form.Group>
-                  <Button variant="primary" type="submit" className="submitButton">
+                  <Button variant="primary" className="submitButton" onClick={this.onShow}>
                     送出
                   </Button>
+                  <Modal
+                    show={show}
+                    onHide={this.onClose}
+                    dialogClassName="modal-90w"
+                    aria-labelledby="example-custom-modal-styling-title"
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title id="confirmModal">資料確認</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <p>資料是否都輸入正確？如果都確認無誤，資料將會送出！</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={this.onClose}>
+                        取消
+                      </Button>
+                      <Button variant="primary" onClick={this.showToast}>
+                        確定
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                  <Toast
+                    bg="white"
+                    onClose={this.closeToast}
+                    show={toastShow}
+                    delay={3000}
+                    autohide={true}
+                    className="my-2"
+                  >
+                    <Toast.Header>
+                      <strong className="me-auto">感謝您的送出</strong>
+                      <small>1 seconds ago</small>
+                    </Toast.Header>
+                    <Toast.Body>我們收到會盡快回覆您的</Toast.Body>
+                  </Toast>
                 </Form>
               </Col>
             </Row>
