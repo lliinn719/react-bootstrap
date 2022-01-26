@@ -26,6 +26,7 @@ export default connect(
     state = {
       email: '',
       password: '',
+      validated: false,
     };
 
     handleChange = e => {
@@ -42,9 +43,11 @@ export default connect(
         password: password,
       };
       POST_login(payload);
+      this.setState({ validated: true });
     };
 
     render() {
+      const { validated } = this.state;
       return (
         <div>
           <Container
@@ -56,11 +59,12 @@ export default connect(
                 <Form
                   className="loginForm p-5 text-center"
                   role="form"
+                  validated={validated}
                   onSubmit={this.handleSubmit}
                 >
                   <FaHamburger className="hamburgerIcon" />
                   <h3 className="my-2">六角西餐廳</h3>
-                  <Form.Group className="mt-4" controlId="formBasicAcconut">
+                  <Form.Group className="mt-4" controlId="formBasicEmail">
                     <Form.Control
                       required
                       name="email"
@@ -78,12 +82,7 @@ export default connect(
                       onChange={this.handleChange}
                     />
                   </Form.Group>
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="mt-3 w-100"
-                    onClick={this.handleSubmit}
-                  >
+                  <Button variant="primary" type="submit" className="mt-3 w-100">
                     送出
                   </Button>
                   <p className="text-center mt-5 mb-0 signupText">

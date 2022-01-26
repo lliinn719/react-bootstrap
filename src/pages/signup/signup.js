@@ -24,19 +24,28 @@ export default connect(
 )(
   class Signup extends Component {
     state = {
+      name: '',
+      email: '',
+      password: '',
       validated: false,
     };
 
-    handleSignUp = event => {
+    handleChange = e => {
+      this.setState({ [e.target.name]: e.target.value });
+      console.log(this.state);
+    };
+
+    handleSignUp = e => {
       const { POST_signUp } = this.props;
-      const { name, email, password } = event.target;
+      const { name, email, password } = this.state;
+      e.preventDefault();
       const payload = {
-        name,
-        email,
-        password,
+        name: name,
+        email: email,
+        password: password,
       };
-      console.log('signupData', payload);
       POST_signUp(payload);
+      this.setState({ validated: true });
     };
 
     render() {
@@ -57,16 +66,38 @@ export default connect(
                   <FaHamburger className="hamburgerIcon" />
                   <h3 className="my-2">六角西餐廳</h3>
                   <Form.Group className="mt-4" controlId="formBasicName">
-                    <Form.Control required name="name" type="name" placeholder="名稱" />
+                    <Form.Control
+                      required
+                      name="name"
+                      type="name"
+                      placeholder="名稱"
+                      onChange={this.handleChange}
+                    />
                     <Form.Control.Feedback type="invalid">請填寫暱稱</Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group className="my-3" controlId="formBasicEmail">
-                    <Form.Control required name="email" type="email" placeholder="信箱" />
+                    <Form.Control
+                      required
+                      name="email"
+                      type="email"
+                      placeholder="信箱"
+                      onChange={this.handleChange}
+                    />
                   </Form.Group>
                   <Form.Group className="my-3" controlId="formBasicPassword">
-                    <Form.Control required name="password" type="password" placeholder="密碼" />
+                    <Form.Control
+                      required
+                      name="password"
+                      type="password"
+                      placeholder="密碼"
+                      onChange={this.handleChange}
+                    />
                   </Form.Group>
-                  <Form.Group className="my-3" controlId="formBasicCheckPassword">
+                  <Form.Group
+                    className="my-3"
+                    controlId="formBasicCheckPassword"
+                    onChange={this.handleChange}
+                  >
                     <Form.Control
                       required
                       name="checkpassword"

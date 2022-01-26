@@ -26,11 +26,8 @@ export default {
       try {
         if (loading) loading(true);
         console.log('im', payload);
-        const response = yield call(POST_signUp, payload);
-        console.log('sign', response.token);
-        yield setToken(response.token);
-        message.success(response.message);
-        yield router.push('/');
+        yield call(POST_signUp, payload);
+        yield router.push('/login');
         if (loading) loading(false);
         if (callback) callback();
       } catch (error) {
