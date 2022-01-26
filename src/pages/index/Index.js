@@ -24,9 +24,9 @@ export default connect(
           <Container fluid className="indexPage p-5">
             <Alert variant="light">
               <Alert.Heading>咬一口就無法忘懷的漢堡</Alert.Heading>
-              <p>七夕絕對無法錯過的好滋味</p>
+              <p className="text-center">七夕絕對無法錯過的好滋味</p>
               <hr />
-              <p className="mb-0">六角大漢堡</p>
+              <p className="mb-0 text-center">六角大漢堡</p>
             </Alert>
             {/* <CommonButton /> */}
           </Container>
@@ -82,7 +82,7 @@ export default connect(
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="text-end">-- 金身道士</Col>
+                  <Col className="text-end mb-3">-- 金身道士</Col>
                 </Row>
               </Col>
               <Col sm="12" md="4">
@@ -102,7 +102,7 @@ export default connect(
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="text-end">-- 產品經理</Col>
+                  <Col className="text-end mb-3">-- 產品經理</Col>
                 </Row>
               </Col>
               <Col sm="12" md="4">
@@ -122,24 +122,32 @@ export default connect(
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="text-end">-- 美麗萬分</Col>
+                  <Col className="text-end mb-3">-- 美麗萬分</Col>
                 </Row>
               </Col>
             </Row>
           </Container>
           <Container fluid className="orderBlock">
             <Row>
-              <Col className="my-5">
-                <h3 className="mt-2 text-center">我們的位置不太夠坐</h3>
-                <h3 className="mt-2 text-center">要不要先訂位呢？</h3>
+              <Col>
+                <div className="my-5">
+                  <h3 className="mt-2 text-center">我們的位置不太夠坐</h3>
+                  <h3 className="mt-2 text-center">要不要先訂位呢？</h3>
+                </div>
               </Col>
             </Row>
             <Row>
-              <Col md="12" lg="6" className="p-5">
-                <Image src={require('../../assets/images/map.png')} className="d-block mx-auto" />
+              <Col md="12" lg="6">
+                <div className="p-5">
+                  <Image
+                    fluid
+                    src={require('../../assets/images/map.png')}
+                    className="d-block mx-auto"
+                  />
+                </div>
               </Col>
-              <Col md="12" lg="6" className="p-5">
-                <Form>
+              <Col md="12" lg="6">
+                <Form className="p-5">
                   <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>姓名</Form.Label>
                     <Form.Control type="name" placeholder="請輸入姓名" />
