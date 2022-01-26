@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import router from 'umi/router';
+// import router from 'umi/router';
 import './signup.less';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { FaHamburger } from 'react-icons/fa';
@@ -11,7 +11,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    POST_signUp(payload, loading, callback) {
+      dispatch({ type: 'users/POST_signUp', payload, loading, callback });
+    },
+  };
 };
 
 export default connect(
@@ -21,6 +25,18 @@ export default connect(
   class Signup extends Component {
     state = {
       validated: false,
+    };
+
+    handleSignUp = event => {
+      const { POST_signUp } = this.props;
+      const { name, email, password } = event.target;
+      const payload = {
+        name,
+        email,
+        password,
+      };
+      console.log('signupData', payload);
+      POST_signUp(payload);
     };
 
     render() {
@@ -33,28 +49,32 @@ export default connect(
           >
             <Row>
               <Col>
-                <Form className="loginForm p-5 text-center" validated={validated}>
+                <Form
+                  className="loginForm p-5 text-center"
+                  validated={validated}
+                  onSubmit={this.handleSignUp}
+                >
                   <FaHamburger className="hamburgerIcon" />
                   <h3 className="my-2">六角西餐廳</h3>
                   <Form.Group className="mt-4" controlId="formBasicName">
-                    <Form.Control required type="name" placeholder="名稱" />
+                    <Form.Control required name="name" type="name" placeholder="名稱" />
                     <Form.Control.Feedback type="invalid">請填寫暱稱</Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group className="my-3" controlId="formBasicEmail">
-                    <Form.Control required type="email" placeholder="信箱" />
+                    <Form.Control required name="email" type="email" placeholder="信箱" />
                   </Form.Group>
                   <Form.Group className="my-3" controlId="formBasicPassword">
-                    <Form.Control required type="password" placeholder="密碼" />
+                    <Form.Control required name="password" type="password" placeholder="密碼" />
                   </Form.Group>
-                  <Form.Group className="my-3" controlId="formBasicPassword">
-                    <Form.Control required type="password" placeholder="密碼" />
+                  <Form.Group className="my-3" controlId="formBasicCheckPassword">
+                    <Form.Control
+                      required
+                      name="checkpassword"
+                      type="password"
+                      placeholder="密碼"
+                    />
                   </Form.Group>
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="mt-3 w-100"
-                    onClick={this.handleSubmit}
-                  >
+                  <Button variant="primary" type="submit" className="mt-3 w-100">
                     註冊
                   </Button>
                   <p className="text-center mt-5 mb-0 signupText">
