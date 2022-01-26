@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import './Index.less';
-import CommonButton from '../../components/Button/commonButton';
 import {
   Container,
   Alert,
