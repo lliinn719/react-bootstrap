@@ -1,3 +1,7 @@
+html,body{
+  height: 100%;
+}
+
 /* bootstrap style */
 
 .navbar-light .navbar-toggler-icon{
@@ -21,21 +25,41 @@ background-image: url(../assets/images/menu.png);
   &:hover{
     background-color: rgb(240, 95, 17);
   }
-  &:focus , &:active{
+  &:focus , &:active , &:focus:active{
+    background-color: rgb(245, 108, 35);
     box-shadow: unset;
   }
+}
+
+.wrapper{
+  height: 100%;
 }
 
 /* custom style */
 .topNavbar{
   background-color: rgba(0,0,0,0.9);
   .navbar-nav .nav-link , .navbar-brand{
+    display: flex;
+    align-items: center;
     color: #fff;
-    &:hover, &:focus , &:active{
+    &:hover, &:focus , &:active ,&:focus-visible{
       color: #fff;
     }
   }
+  .userDropdown{
+    .dropdown-menu{
+      left: -120px;
+    }
+  &:focus-visible{
+    color: #fff;
+  }
+  }
 }
+
+.layoutContainer{
+  min-height:100vh;
+}
+
 .footer{
   background-color: #EFE9E7;
   color: #3D1101;

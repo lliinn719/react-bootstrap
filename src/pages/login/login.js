@@ -7,7 +7,9 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { FaHamburger } from 'react-icons/fa';
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    response: state.users.response || [],
+  };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -26,12 +28,12 @@ export default connect(
     state = {
       email: '',
       password: '',
+      messageShow: false,
       validated: false,
     };
 
     handleChange = e => {
       this.setState({ [e.target.name]: e.target.value });
-      console.log(this.state);
     };
 
     handleSubmit = e => {

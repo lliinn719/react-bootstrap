@@ -1,5 +1,12 @@
 import request from '../utils/request';
 
+export function GET_user(token) {
+  return request.get('/user', null, {
+    headers: {
+      Authorization: `bearer ${token}`,
+    },
+  });
+}
 export function POST_login(payload) {
   return request.post('/user', payload);
 }

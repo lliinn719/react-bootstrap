@@ -5,6 +5,7 @@ import withRouter from 'umi/withRouter';
 import { connect } from 'dva';
 import { Container, Nav, Navbar, NavDropdown, Row, Col } from 'react-bootstrap';
 import { BsGoogle, BsFacebook, BsTwitter } from 'react-icons/bs';
+import { FaUserAlt, FaHamburger } from 'react-icons/fa';
 import './GlobalLayout.less';
 
 const mapStateToProps = state => {
@@ -29,29 +30,68 @@ export default withRouter(
 
       componentDidMount = () => {};
 
+      handleLogout = () => {
+        localStorage.removeItem('token');
+        window.location.reload();
+      };
+
       render() {
         const { children } = this.props;
         return (
-          <Container fluid className="px-0">
-            <Navbar className="topNavbar" expand="lg">
-              <Container>
-                <Navbar.Brand href="#home">六角西餐廳</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                  <Nav>
-                    <Nav.Link href="#home">關於我們</Nav.Link>
-                    <NavDropdown title="餐廳特色" id="basic-nav-dropdown">
-                      <NavDropdown.Item href="#action/3.1">主廚</NavDropdown.Item>
-                      <NavDropdown.Item href="#action/3.2">地圖</NavDropdown.Item>
-                      <NavDropdown.Item href="#action/3.3">訂購</NavDropdown.Item>
-                    </NavDropdown>
-                    <Nav.Link href="/login">登入/註冊</Nav.Link>
-                  </Nav>
-                </Navbar.Collapse>
+          <div className="wrapper">
+            {localStorage.getItem('token') ? (
+              <Container fluid className="px-0">
+                <Navbar className="topNavbar" expand="lg">
+                  <Container>
+                    <Navbar.Brand href="/">
+                      <FaHamburger className="mx-2" />
+                      六角西餐廳
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                      <Nav>
+                        <Nav.Link href="/about">關於我們</Nav.Link>
+                        <NavDropdown title="餐廳特色" id="basic-nav-dropdown">
+                          <NavDropdown.Item href="#action/3.2">地圖</NavDropdown.Item>
+                          <NavDropdown.Item href="#action/3.3">訂購</NavDropdown.Item>
+                        </NavDropdown>
+                        <Nav.Link href="/food">餐點介紹</Nav.Link>
+                        <NavDropdown
+                          title={<FaUserAlt />}
+                          id="basic-nav-userDropdown"
+                          className="text-white userDropdown"
+                        >
+                          <NavDropdown.Item href="#action/3.2">帳戶資料</NavDropdown.Item>
+                          <NavDropdown.Item onClick={this.handleLogout}>登出</NavDropdown.Item>
+                        </NavDropdown>
+                      </Nav>
+                    </Navbar.Collapse>
+                  </Container>
+                </Navbar>
               </Container>
-            </Navbar>
-            <Container fluid className="px-0">
-              {children}
+            ) : (
+              <Container fluid className="px-0">
+                <Navbar className="topNavbar" expand="lg">
+                  <Container>
+                    <Navbar.Brand href="#home">六角西餐廳</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                      <Nav>
+                        <Nav.Link href="#home">關於我們</Nav.Link>
+                        <NavDropdown title="餐廳特色" id="basic-nav-dropdown">
+                          <NavDropdown.Item href="#action/3.1">主廚</NavDropdown.Item>
+                          <NavDropdown.Item href="#action/3.2">地圖</NavDropdown.Item>
+                          <NavDropdown.Item href="#action/3.3">訂購</NavDropdown.Item>
+                        </NavDropdown>
+                        <Nav.Link href="/login">登入/註冊</Nav.Link>
+                      </Nav>
+                    </Navbar.Collapse>
+                  </Container>
+                </Navbar>
+              </Container>
+            )}
+            <Container fluid className="px-0 ">
+              <div className="layoutContainer">{children}</div>
             </Container>
             <Container fluid className="footer">
               <Row className="footer p-5">
@@ -80,7 +120,7 @@ export default withRouter(
                 </Col>
               </Row>
             </Container>
-          </Container>
+          </div>
         );
       }
     },

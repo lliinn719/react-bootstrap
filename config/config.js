@@ -19,6 +19,16 @@ export default {
       routes: [{ path: '/login', component: '../pages/login/login', exact: true }],
     },
     {
+      path: '/about',
+      component: '../layouts/GlobalLayout',
+      routes: [{ path: '/about', component: '../pages/about/about', exact: true }],
+    },
+    {
+      path: '/food',
+      component: '../layouts/GlobalLayout',
+      routes: [{ path: '/food', component: '../pages/food/food', exact: true }],
+    },
+    {
       path: '/',
       component: '../layouts/GlobalLayout',
       routes: [{ path: '/', component: '../pages/index/Index', exact: true }],
